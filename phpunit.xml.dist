@@ -5,7 +5,7 @@
          colors="true">
     <testsuites>
         <testsuite name="AmzTest">
-            <directory>./test/src</directory>
+            <directory>./test</directory>
         </testsuite>
     </testsuites>
     <filter>
