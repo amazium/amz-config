@@ -24,6 +24,7 @@
         }
     },
     "require": {
+        "php": "^7.3",
         "ext-json": "^1.7",
         "illuminate/support": "^5.7"
     },
