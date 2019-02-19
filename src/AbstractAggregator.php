@@ -2,7 +2,6 @@
 
 namespace Amz\Config;
 
-use Amz\Config\Exception\PathNotFoundException;
 use Amz\Config\Util\Dir;
 use Amz\Config\Util\File;
 use Amz\Config\Util\Path;
@@ -45,24 +44,20 @@ abstract class AbstractAggregator implements Aggregator
     {
         // Check if the file/path exists
         $path = PathFactory::fromPathString($this->path);
-        if (!$path->exists()) {
-            throw PathNotFoundException::withPath($this->path);
-        }
 
         // Process file or path
         $result = [];
         $skipFilesInCurrentDir = false;
         if ($path instanceof File) {
             $result = $this->parseFile($path);
-            $path = new Dir($path->getDirName());
+            $dir = new Dir($path->getDirName());
             $skipFilesInCurrentDir = true;
+        } else {
+            $dir = new Dir($path->getRealPath());
         }
 
         // Aggregate and return array
-        if ($path instanceof Dir) {
-            return $this->aggregatePath($path, $result, $skipFilesInCurrentDir);
-        }
-        return [];
+        return $this->aggregatePath($dir, $result, $skipFilesInCurrentDir);
     }
 
     /**
@@ -73,11 +68,6 @@ abstract class AbstractAggregator implements Aggregator
      */
     public function aggregatePath(Dir $path, array $result = [], bool $skipFilesInCurrentDir = false): array
     {
-        // Check if the file/path exists
-        if (!$path->exists()) {
-            throw PathNotFoundException::withPath($path->getPath());
-        }
-
         $paths = $path->getFilesAndDirs($this->extensions(), $skipFilesInCurrentDir);
         /** @var Path $subPath */
         foreach ($paths as $subPath) {

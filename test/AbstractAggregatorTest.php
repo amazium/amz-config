@@ -59,6 +59,28 @@ class AbstractAggregatorTest extends TestCase
         $this->assertEquals(2, $result['b']);
         $this->assertArrayHasKey('c', $result);
         $this->assertEquals([ 3, 4 ], $result['c']);
+
+        $this->assertArrayHasKey('d', $result);
+        $this->assertArrayHasKey('e', $result['d']);
+        $this->assertEquals([ 5, 6 ], $result['d']['e']);
+        $this->assertArrayHasKey('f', $result['d']);
+        $this->assertArrayHasKey('g', $result['d']['f']);
+        $this->assertEquals(7, $result['d']['f']['g']);
+    }
+
+    public function testAggregateKnownPath()
+    {
+        $json = new JsonAggregator($this->base);
+        $result = $json->aggregate();
+
+        $this->assertArrayHasKey('test', $result);
+        $this->assertArrayHasKey('a', $result['test']);
+        $this->assertEquals(1, $result['test']['a']);
+        $this->assertArrayHasKey('b', $result['test']);
+        $this->assertEquals(2, $result['test']['b']);
+        $this->assertArrayHasKey('c', $result['test']);
+        $this->assertEquals([ 3, 4 ], $result['test']['c']);
+
         $this->assertArrayHasKey('d', $result);
         $this->assertArrayHasKey('e', $result['d']);
         $this->assertEquals([ 5, 6 ], $result['d']['e']);
