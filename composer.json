@@ -24,7 +24,9 @@
         }
     },
     "require": {
+        "php": "^7.3",
         "ext-json": "^1.7",
+        "amazium/amz-core": "dev-develop",
         "illuminate/support": "^5.7"
     },
     "require-dev": {

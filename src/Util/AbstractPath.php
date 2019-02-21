@@ -2,7 +2,7 @@
 
 namespace Amz\Config\Util;
 
-use Illuminate\Support\Str;
+use Amz\Core\Support\Util\Str;
 
 abstract class AbstractPath implements Path
 {

@@ -6,7 +6,7 @@ use Amz\Config\Util\Dir;
 use Amz\Config\Util\File;
 use Amz\Config\Util\Path;
 use Amz\Config\Util\PathFactory;
-use Illuminate\Support\Str;
+use Amz\Core\Support\Util\Str;
 
 abstract class AbstractAggregator implements Aggregator
 {
