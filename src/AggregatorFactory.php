@@ -3,7 +3,7 @@
 namespace Amz\Config;
 
 use Amz\Config\Exception\UnknownAggregatorExtensionException;
-use Illuminate\Support\Str;
+use Amz\Core\Support\Util\Str;
 
 class AggregatorFactory
 {
