@@ -38,6 +38,20 @@ abstract class AbstractAggregator implements Aggregator
     abstract protected function parseFile(File $file): array;
 
     /**
+     * Returns the root config if a file
+     *
+     * @return array|null
+     */
+    public function rootConfig(): ?array
+    {
+        $fileOrDir = PathFactory::fromPathString($this->path);
+        if ($fileOrDir instanceof File) {
+            return $this->parseFile($fileOrDir);
+        }
+        return null;
+    }
+
+    /**
      * @return array
      */
     public function aggregate(): array
