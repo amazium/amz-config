@@ -8,6 +8,8 @@ interface Aggregator
 {
     public function __construct(string $path);
 
+    public function rootConfig(): ?array;
+
     public function aggregate(): array;
 
     public function aggregatePath(Dir $path, array $result = [], bool $skipFilesInCurrentDir = false): array;
